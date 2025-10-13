@@ -29,7 +29,6 @@
     </div>
   </div>
 </nav>
-
 </template>
 <style scoped>
 .carousel-item {
