@@ -10,7 +10,7 @@ import Navbar from './components/Navbar.vue';
   <main>
   <Content/>
   </main>
-  <footer>
+  <footer class="text-center">
     Copyright &copy; All right reserved!
   </footer>
 </template>

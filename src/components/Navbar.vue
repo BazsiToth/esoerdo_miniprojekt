@@ -1,17 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
 
-onMounted(() => {
-  if (typeof window !== 'undefined' && window.bootstrap) {
-    const carouselElement = document.querySelector('#carouselExampleIndicators')
-    if (carouselElement) {
-      new window.bootstrap.Carousel(carouselElement, {
-        interval: 3000,
-        ride: 'carousel'
-      })
-    }
-  }
-})
 </script>
 <template>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
