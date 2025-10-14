@@ -13,21 +13,21 @@
     <div class="carousel-item active">
       <img class="d-block w-100" src="../assets/ContentEsoerdo1.jpg" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Slider One Item</h5>
+        <h5>Éghajlat</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="../assets/ContentEsoerdo2.jpg" alt="Second slide">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Slider Two Item</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+        <h5>Természet</h5>
+        <p>Növényzet & Vizek</p>
       </div>
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="../assets/ContentEsoerdo4.jpg" alt="Third slide">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Slider Three Item</h5>
+        <h5>Állatvilág</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
       </div>
     </div>
