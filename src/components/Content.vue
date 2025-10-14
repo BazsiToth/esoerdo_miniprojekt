@@ -14,7 +14,7 @@
       <img class="d-block w-100" src="../assets/ContentEsoerdo1.jpg" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
         <h5>Éghajlat</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+        <p>Hőmérséklet & Csapadék</p>
       </div>
     </div>
     <div class="carousel-item">
@@ -28,7 +28,7 @@
       <img class="d-block w-100" src="../assets/ContentEsoerdo4.jpg" alt="Third slide">
       <div class="carousel-caption d-none d-md-block">
         <h5>Állatvilág</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+        <p>Madárvilág & Emlősök</p>
       </div>
     </div>
   </div>
