@@ -1,9 +1,20 @@
 <script setup>
 import Content from './components/Content.vue';
 import Navbar from './components/Nav.vue';
+import LoadingScreen from './components/LoadingScreen.vue';
+import { ref, onMounted } from 'vue';
+
+const isLoading = ref(true)
+
+onMounted(async () => {
+  setTimeout(() => {
+    isLoading.value = false
+  }, 1500)
+})
 </script>
 
 <template>
+  <LoadingScreen :isLoading="isLoading" />
   <header>
   <Navbar/>
   </header>
