@@ -27,7 +27,6 @@ onMounted(() => {
     <div class="container">
       <a class="navbar-brand" href="#">Mouri</a>
 
-      <!-- Hamburger -->
       <button class="navbar-toggler" type="button" @click="isOpen = !isOpen" :aria-expanded="isOpen.toString()"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,7 +38,6 @@ onMounted(() => {
             <a class="nav-link active" href="#" @click="closeMenu">Főoldal</a>
           </li>
 
-          <!-- Dropdown -->
           <li class="nav-item dropdown" @mouseenter="windowWidth > 991 && (isDropdownOpen = true)"
             @mouseleave="windowWidth > 991 && (isDropdownOpen = false)">
             <a class="nav-link dropdown-toggle" href="#" role="button"
@@ -71,7 +69,6 @@ onMounted(() => {
   border-radius: 10px;
 }
 
-/* Hover dropdown nagy képernyőn */
 @media (min-width: 992px) {
   .nav-item.dropdown:hover .dropdown-menu {
     display: block;
