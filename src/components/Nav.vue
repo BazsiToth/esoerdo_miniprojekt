@@ -12,8 +12,6 @@ const closeMenu = () => {
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
     <div class="container">
       <a class="navbar-brand" href="#">Mouri</a>
-
-      <!-- Saját Vue-alapú hamburger -->
       <button
         class="navbar-toggler"
         type="button"
@@ -23,8 +21,6 @@ const closeMenu = () => {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <!-- A Vue irányítja a nyitást/zárást -->
       <div class="collapse navbar-collapse" :class="{ show: isOpen }" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
