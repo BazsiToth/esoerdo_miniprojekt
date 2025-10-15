@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../assets/ContentEsoerdo4.jpg" alt="Third slide">
+          <img class="d-block w-100" src="../assets/ContentEsoerdo6.jpg" alt="Third slide">
           <div class="carousel-caption">
             <h5>Állatvilág</h5>
             <p>Madárvilág & Emlősök</p>
