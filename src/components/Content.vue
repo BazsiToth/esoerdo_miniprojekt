@@ -14,21 +14,21 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="../assets/ContentEsoerdo1.jpg" alt="First slide">
+          <img class="d-block w-100" src="../assets/Content_Rainforest1.jpg" alt="Leszállt felhők egy esőerdőben">
           <div class="carousel-caption">
             <h5>Éghajlat</h5>
             <p>Hőmérséklet & Csapadék</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../assets/ContentEsoerdo2.jpg" alt="Second slide">
+          <img class="d-block w-100" src="../assets/Content_Rainforest2.jpg" alt="Változatas növényvilága az esőerdőknek">
           <div class="carousel-caption">
             <h5>Természet</h5>
             <p>Növényzet & Vizek</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../assets/ContentEsoerdo6.jpg" alt="Third slide">
+          <img class="d-block w-100" src="../assets/Content_Rainforest3.jpg" alt="Az esőerdő állatai">
           <div class="carousel-caption">
             <h5>Állatvilág</h5>
             <p>Madárvilág & Emlősök</p>
