@@ -10,7 +10,6 @@ const closeMenu = () => {
   isDropdownOpen.value = false
 }
 
-// Figyeljük az ablakméret változását
 const handleResize = () => {
   windowWidth.value = window.innerWidth
   if (windowWidth.value > 992) {
