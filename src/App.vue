@@ -3,6 +3,7 @@ import Content from './components/Content.vue';
 import Navbar from './components/Nav.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import { ref, onMounted } from 'vue';
+import InteractiveMap from './components/InteractiveMap.vue';
 
 const isLoading = ref(true)
 
@@ -20,6 +21,7 @@ onMounted(async () => {
   </header>
   <main>
   <Content/>
+  <InteractiveMap />
   </main>
   <footer class="text-center p-4">
     Copyright &copy; All right reserved!
