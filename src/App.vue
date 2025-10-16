@@ -1,10 +1,8 @@
 <script setup>
-import Content from './components/Content.vue';
 import Navbar from './components/Nav.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import { ref, onMounted } from 'vue';
-import InteractiveMap from './components/InteractiveMap.vue';
-
+import Kezdolap from './components/Kezdolap.vue';
 const isLoading = ref(true)
 
 onMounted(async () => {
@@ -17,11 +15,10 @@ onMounted(async () => {
 <template>
   <LoadingScreen :isLoading="isLoading" />
   <header>
-  <Navbar/>
+    <Navbar />
   </header>
   <main>
-  <Content/>
-  <InteractiveMap />
+    <router-view></router-view>
   </main>
   <footer class="text-center p-4">
     Copyright &copy; All right reserved!
