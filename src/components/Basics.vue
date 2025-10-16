@@ -303,22 +303,22 @@ onUnmounted(() => {
             </div>
 
             <div class="arch__right">
-                <div class="img-wrapper" data-index="4">
+                <div class="img-wrapper" data-index="4" style="z-index: 4; clip-path: inset(0px);">
                     <img src="../assets/Basics_Scroll1.jpg"
                         alt="Green Architecture" />
                 </div>
 
-                <div class="img-wrapper" data-index="3">
+                <div class="img-wrapper img-scroll" data-index="3" style="z-index: 3;">
                     <img src="../assets/Basics_Scroll2.jpg"
                         alt="Blue Architecture" />
                 </div>
 
-                <div class="img-wrapper" data-index="2">
+                <div class="img-wrapper img-scroll" data-index="2" style="z-index: 2;">
                     <img src="../assets/Basics_Scroll3.jpg"
                         alt="Pink Architecture" />
                 </div>
 
-                <div class="img-wrapper" data-index="1">
+                <div class="img-wrapper img-scroll" data-index="1" style="z-index: 1;">
                     <img src="../assets/Basics_Scroll4.jpg"
                         alt="Orange Architecture" />
                 </div>
@@ -417,9 +417,12 @@ onUnmounted(() => {
 
 .img-wrapper img {
     width: 100%;
-    height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.img-scroll img {
+    height: 100%;
 }
 
 /* responsive */
