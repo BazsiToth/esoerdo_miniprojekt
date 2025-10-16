@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 
-const eleres = ref("../assets/galery/Galery");
-import { kepekszama } from '../datas/rainforests';
+const eleres = ref("../assets/galery/animals/Galery");
 
-const kepek = ref(kepekszama);
+const imageFiles = import.meta.glob('../assets/galery/animals/*.jpg', { eager: true })
+const IMAGE_COUNT = Object.keys(imageFiles).length
+
 const selectedImage = ref(null);
 
 const getImageFromUrl = (url) => {
@@ -35,7 +36,7 @@ const prevImage = () => {
 <template>
     <section class="gallery-container">
         <div class="gallery-grid">
-            <div v-for="(kep, index) in kepek" :key="index" class="gallery-item" @click="openLightbox(index)">
+            <div v-for="(kep, index) in IMAGE_COUNT" :key="index" class="gallery-item" @click="openLightbox(index)">
                 <img class="gallery-image" :src="getImageFromUrl(index)" :alt="'Kép ' + (index + 1)">
             </div>
         </div>
