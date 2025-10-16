@@ -8,7 +8,7 @@ export const rainforests = [
     "radius": 800000,
     "leiras": "A világ legnagyobb trópusi esőerdeje, területének mintegy 60%-a Brazíliában található. Hatalmas biodiverzitással és kiemelkedő szereppel a Föld oxigéntermelésében.",
     "koordinatak": [-3.465305, -62.215881],
-    "kep": "/assets/amazon.jpg"
+    "kep": "/assets/IM_amazon.jpg"
   },
   {
     "id": "congo_basin",
@@ -19,7 +19,7 @@ export const rainforests = [
     "radius": 500000,
     "leiras": "A világ második legnagyobb esőerdeje, hatalmas szénmegkötő terület és a gorillák, bonobók, valamint sok endemikus faj élőhelye.",
     "koordinatak": [0.0, 20.0],
-    "kep": "/assets/congo.jpg"
+    "kep": "/assets/IM_congo.jpg"
   },
   {
     "id": "new_guinea",
@@ -30,7 +30,7 @@ export const rainforests = [
     "radius": 350000,
     "leiras": "A világ harmadik legnagyobb összefüggő esőerdeje, több ezer endemikus növény- és állatfajjal. A terület sok része még feltáratlan.",
     "koordinatak": [-4.0, 141.0],
-    "kep": "/assets/new_guinea.jpg"
+    "kep": "/assets/IM_new_guinea.jpg"
   },
   {
     "id": "borneo",
@@ -41,7 +41,7 @@ export const rainforests = [
     "radius": 340000,
     "leiras": "Az orangutánok és más ritka fajok otthona. Az utóbbi évtizedekben erősen csökkent a területe az olajpálma-ültetvények miatt.",
     "koordinatak": [1.5, 114.0],
-    "kep": "/assets/borneo.png"
+    "kep": "/assets/IM_borneo.png"
   },
   {
     "id": "sumatra",
@@ -52,7 +52,7 @@ export const rainforests = [
     "radius": 180000,
     "leiras": "UNESCO Világörökség része (Tropical Rainforest Heritage of Sumatra). Itt él a szumátrai orángután és tigris is.",
     "koordinatak": [0.6, 101.0],
-    "kep": "/assets/sumatra.jpg"
+    "kep": "/assets/IM_sumatra.jpg"
   },
   {
     "id": "mata_atlantica",
@@ -63,7 +63,7 @@ export const rainforests = [
     "radius": 130000,
     "leiras": "Egykor hatalmas kiterjedésű volt, ma erősen feldarabolt. Magas endemikus fajarány jellemzi.",
     "koordinatak": [-23.0, -46.0],
-    "kep": "/assets/mata_atlantica.jpg"
+    "kep": "/assets/IM_mata_atlantica.jpg"
   },
   {
     "id": "mesoamerica",
@@ -74,7 +74,7 @@ export const rainforests = [
     "radius": 280000,
     "leiras": "A Chocó régió a Föld egyik legnedvesebb helye. Rendkívül gazdag élővilágú, sok ritka madár- és növényfajjal.",
     "koordinatak": [8.0, -77.5],
-    "kep": "/assets/mesoamerica.jpg"
+    "kep": "/assets/IM_mesoamerica.jpg"
   },
   {
     "id": "madagascar",
@@ -85,7 +85,7 @@ export const rainforests = [
     "radius": 100000,
     "leiras": "Különleges élővilágú terület, ahol a fajok több mint 80%-a sehol máshol nem él. Itt találhatók a híres makik is.",
     "koordinatak": [-18.9, 47.5],
-    "kep": "/assets/madagascar.png"
+    "kep": "/assets/IM_madagascar.png"
   },
   {
     "id": "australian_wet_tropics",
@@ -96,7 +96,7 @@ export const rainforests = [
     "radius": 40000,
     "leiras": "A világ egyik legrégebbi folyamatosan fennmaradt esőerdeje. Ősi növényfajok élőhelye.",
     "koordinatak": [-16.25, 145.6],
-    "kep": "/assets/daintree.jpg"
+    "kep": "/assets/IM_daintree.jpg"
   },
   {
     "id": "indo_burma",
@@ -107,6 +107,6 @@ export const rainforests = [
     "radius": 280000,
     "leiras": "Sok veszélyeztetett faj él itt, többek között az indokínai tigris. Az erdőirtás és vadászat súlyosan érinti.",
     "koordinatak": [16.0, 97.0],
-    "kep": "/assets/indo_burma.png"
+    "kep": "/assets/IM_indo_burma.png"
   }
 ]
