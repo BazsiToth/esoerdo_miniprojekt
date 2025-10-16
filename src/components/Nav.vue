@@ -26,7 +26,7 @@ onMounted(() => {
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
     <div class="container">
       <a class="navbar-brand" href="#">Mouri</a>
-      
+
       <button class="navbar-toggler" type="button" @click="isOpen = !isOpen" :aria-expanded="isOpen.toString()"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,8 +51,10 @@ onMounted(() => {
               <li><a class="dropdown-item" href="#">Állatvilága</a></li>
             </ul>
           </li>
-          <li class="nav-item"><router-link to="/galeria" class="nav-link" href="#" @click="closeMenu">Galéria</router-link></li>
-          <li class="nav-item"><router-link to="/quiz" class="nav-link" href="#" @click="closeMenu">Quiz</router-link></li>
+          <li class="nav-item"><router-link to="/galeria" class="nav-link" href="#"
+              @click="closeMenu">Galéria</router-link></li>
+          <li class="nav-item"><router-link to="/quiz" class="nav-link" href="#" @click="closeMenu">Quiz</router-link>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#" @click="closeMenu">Rólunk</a></li>
         </ul>
       </div>
@@ -74,7 +76,7 @@ onMounted(() => {
   .nav-item.dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 5px;
-    border-radius: 0 6px;
+    border-radius: 0 6px 6px 6px;
   }
 }
 
@@ -103,6 +105,8 @@ onMounted(() => {
 
 .nav-item {
   padding: 5px;
+  font-weight: 500;
+  text-shadow: 2px 2px 10px black;
 }
 
 
@@ -110,6 +114,12 @@ onMounted(() => {
   text-align: center;
   border: 0;
   border-radius: 0 0 6px 6px;
+}
+
+.dropdown-item {
+  color: white;
+  font-weight: 500;
+  text-shadow: 2px 2px 10px black;
 }
 
 .nav-item:hover {

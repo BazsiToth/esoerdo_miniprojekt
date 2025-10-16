@@ -1,8 +1,10 @@
 <script setup>
-import { onMounted } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { rainforests } from '../datas/rainforests.js'
+import { ref, onMounted, nextTick } from 'vue'
+import { gsap } from 'gsap'
+
 
 const getImageFromUrl = (url) => {
   return new URL(url, import.meta.url).href
@@ -93,23 +95,135 @@ onMounted(() => {
     }
   }
 })
+const base = ref(null)
+const container = ref(null)
+
+onMounted(async () => {
+  const baseEl = base.value
+  const containerEl = container.value
+  const textEl = containerEl.querySelector('div:first-child')
+  const textHTML = textEl.outerHTML
+  const baseWidth = baseEl.offsetWidth
+
+  function runBackgroundAnimation(el) {
+    const textWidth = el.offsetWidth
+
+    gsap.to(el, {
+      duration: 20,
+      x: -(baseWidth + textWidth),
+      ease: 'none',
+      onUpdate() {
+        if (el.getBoundingClientRect().left + (textWidth - baseWidth) <= 0) {
+          containerEl.insertAdjacentHTML('beforeend', textHTML)
+          const newEl = containerEl.querySelector('div:last-child')
+          runBackgroundAnimation(newEl)
+          this.vars.onUpdate = null
+        }
+      },
+      onComplete() {
+        el.remove()
+      }
+    })
+  }
+
+  await nextTick()
+  runBackgroundAnimation(textEl)
+})
+
 </script>
 
 <template>
   <section>
+
+
+    <div class="container text-container text-center">
+      <h2>Tekintsd meg interaktív térképünket!</h2>
+      <div class="map-text">
+        <p>
+          Az interaktív térképünkön meg tudod tekinteni az ismertebb, nagyobb esőerdőket, emellett azoknak pár fontos
+          adatát!
+        </p>
+      </div>
+    </div>
+    <div id="background-wrapper" ref="base">
+      <div id="background-text" ref="container">
+        <div>Interaktív&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      </div>
+    </div>
     <div class="container map-container">
       <div id="map"></div>
     </div>
   </section>
 </template>
 
+
 <style scoped>
+p {
+  font-size: 20px;
+  margin-bottom: 0;
+  color: #212529;
+  font-weight: 500;
+}
+
+h2 {
+  font-weight: 1000;
+  margin-bottom: 100px;
+}
+
+.text-container {
+  width: 40%;
+  z-index: 3;
+}
+
+.text-container>h2 {
+  font-size: 3vw;
+}
+
+@media (max-width: 1200px) {
+  .text-container {
+    width: 70%;
+  }
+
+  .text-container>h2 {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .text-container {
+    width: 80%;
+  }
+
+  .text-container>h2 {
+    font-size: 5vw;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .text-container {
+    width: 90%;
+  }
+
+  .text-container>h2 {
+    font-size: 7vw;
+  }
+}
+
+.map-text {
+  padding: 20px;
+  background-color: #f2efe9;
+  border-radius: 15px;
+  margin: 10% auto;
+  width: 70%;
+  max-width: 1100px;
+}
+
 #map {
   height: 660px;
   width: 70%;
   margin: 0 auto;
   border-radius: 10px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
   overflow: hidden;
 }
 
@@ -120,7 +234,32 @@ onMounted(() => {
 }
 
 section {
-  background-color: #f0f0f2;
+  background-color: #aad3df;
   padding: 60px 0;
+}
+
+
+#background-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  z-index: 0;
+}
+
+#background-text {
+  position: relative;
+  font-size: 20em;
+  font-weight: 900;
+  /**color: #f2efe9;**/
+  white-space: nowrap;
+  z-index: 0;
+
+
+  &>div {
+    position: absolute;
+    overflow: hidden;
+    left: 100%;
+  }
 }
 </style>

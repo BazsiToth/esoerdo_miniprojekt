@@ -10,6 +10,4 @@ import Basics from './Basics.vue';
     <InteractiveMap />
     <Basics />
 </template>
-<style scoped>
-
-</style>
+<style scoped></style>
