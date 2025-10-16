@@ -8,10 +8,12 @@ const props = defineProps({
   }
 })
 
-const showLoader = ref(true)
+const showLoader = ref(props.isLoading)
 
 watch(() => props.isLoading, (newVal) => {
-  if (!newVal) {
+  if (newVal) {
+    showLoader.value = true
+  } else {
     setTimeout(() => {
       showLoader.value = false
     }, 500)
@@ -32,22 +34,21 @@ watch(() => props.isLoading, (newVal) => {
   position: fixed;
   top: 0;
   left: 0;
-background: 
-    radial-gradient(ellipse 150% 100% at 50% 0%, 
-        #B5D6E4 0%,
-        #8AB3C4 30%,
-        transparent 70%),
-    radial-gradient(circle at 0% 100%, 
-        #4D8A73 0%,
-        #6B9D87 40%,
-        transparent 80%),
-    radial-gradient(circle at 100% 100%, 
-        #4D8A73 0%,
-        #6B9D87 40%,
-        transparent 80%),
+  background:
+    radial-gradient(ellipse 150% 100% at 50% 0%,
+    #B5D6E4 0%,
+    #8AB3C4 30%,
+    transparent 70%),
+    radial-gradient(circle at 0% 100%,
+    #4D8A73 0%,
+    #6B9D87 40%,
+    transparent 80%),
+    radial-gradient(circle at 100% 100%,
+    #4D8A73 0%,
+    #6B9D87 40%,
+    transparent 80%),
     #6A9AA8;
-background-blend-mode: overlay, multiply, normal;
-
+  background-blend-mode: overlay, multiply, normal;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,46 +79,18 @@ background-blend-mode: overlay, multiply, normal;
 }
 
 @keyframes loader {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  25% {
-    transform: rotate(180deg);
-  }
-
-  50% {
-    transform: rotate(180deg);
-  }
-
-  75% {
-    transform: rotate(360deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(180deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(360deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @keyframes loader-inner {
-  0% {
-    height: 0%;
-  }
-
-  25% {
-    height: 0%;
-  }
-
-  50% {
-    height: 100%;
-  }
-
-  75% {
-    height: 100%;
-  }
-
-  100% {
-    height: 0%;
-  }
+  0% { height: 0%; }
+  25% { height: 0%; }
+  50% { height: 100%; }
+  75% { height: 100%; }
+  100% { height: 0%; }
 }
 </style>

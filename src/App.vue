@@ -1,24 +1,31 @@
 <script setup>
 import Navbar from './components/Nav.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
-import { ref, onMounted } from 'vue';
-import Kezdolap from './components/Kezdolap.vue';
-const isLoading = ref(true)
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-onMounted(async () => {
+const isLoading = ref(true);
+const route = useRoute();
+
+setTimeout(() => {
+  isLoading.value = false;
+}, 1500);
+
+watch(() => route.fullPath, () => {
+  isLoading.value = true;
   setTimeout(() => {
-    isLoading.value = false
-  }, 1500)
-})
+    isLoading.value = false;
+  }, 1500);
+});
 </script>
 
 <template>
   <LoadingScreen :isLoading="isLoading" />
   <header>
-    <Navbar />
+    <Navbar/>
   </header>
   <main>
-    <router-view></router-view>
+    <router-view :key="route.fullPath"></router-view>
   </main>
   <footer class="text-center p-4">
     Copyright &copy; All right reserved!
