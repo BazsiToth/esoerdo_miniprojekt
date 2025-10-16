@@ -26,7 +26,7 @@ onMounted(() => {
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
     <div class="container">
       <a class="navbar-brand" href="#">Mouri</a>
-
+      
       <button class="navbar-toggler" type="button" @click="isOpen = !isOpen" :aria-expanded="isOpen.toString()"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@ onMounted(() => {
       <div class="collapse navbar-collapse" :class="{ show: isOpen }" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="#" @click="closeMenu">Főoldal</a>
+            <router-link to="/" class="nav-link active" href="#" @click="closeMenu">Főoldal</router-link>
           </li>
 
           <li class="nav-item dropdown" @mouseenter="windowWidth > 991 && (isDropdownOpen = true)"
@@ -51,7 +51,7 @@ onMounted(() => {
               <li><a class="dropdown-item" href="#">Állatvilága</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#" @click="closeMenu">Quiz</a></li>
+          <li class="nav-item"><router-link to="/quiz" class="nav-link" href="#" @click="closeMenu">Quiz</router-link></li>
           <li class="nav-item"><a class="nav-link" href="#" @click="closeMenu">Rólunk</a></li>
         </ul>
       </div>
