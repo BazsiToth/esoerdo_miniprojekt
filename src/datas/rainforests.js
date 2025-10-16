@@ -111,6 +111,4 @@ export const rainforests = [
   }
 ]
 
-export const kepekszama = [{
-  "kepekszama": "3"
-}]
+export const kepekszama = 12;
