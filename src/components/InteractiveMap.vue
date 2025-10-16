@@ -106,7 +106,8 @@ onMounted(() => {
 <style scoped>
 #map {
   height: 660px;
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
   border-radius: 10px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.18);
   overflow: hidden;
