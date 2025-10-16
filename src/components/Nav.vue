@@ -51,6 +51,7 @@ onMounted(() => {
               <li><a class="dropdown-item" href="#">Állatvilága</a></li>
             </ul>
           </li>
+          <li class="nav-item"><router-link to="/quiz" class="nav-link" href="#" @click="closeMenu">Galéria</router-link></li>
           <li class="nav-item"><router-link to="/quiz" class="nav-link" href="#" @click="closeMenu">Quiz</router-link></li>
           <li class="nav-item"><a class="nav-link" href="#" @click="closeMenu">Rólunk</a></li>
         </ul>
