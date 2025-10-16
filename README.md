@@ -8,4 +8,10 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 
 ╰─ npm install bootstrap jquery popper.js                                                                                                                                ─╯
 
+npm install gsap
+
+npm i
+
+npm run dev
+
 
