@@ -4,18 +4,23 @@ import LoadingScreen from './components/LoadingScreen.vue';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-const isLoading = ref(true);
+const isLoading = ref(false);
 const route = useRoute();
 
-setTimeout(() => {
-  isLoading.value = false;
-}, 1500);
-
-watch(() => route.fullPath, () => {
+if (route.path === '/') {
   isLoading.value = true;
   setTimeout(() => {
     isLoading.value = false;
   }, 1500);
+}
+
+watch(() => route.fullPath, (newPath) => {
+  if (newPath === '/') {
+    isLoading.value = true;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1500);
+  }
 });
 </script>
 
