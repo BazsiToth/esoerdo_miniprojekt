@@ -20,6 +20,7 @@
             <p>Hőmérséklet & Csapadék</p>
           </div>
         </div>
+
         <div class="carousel-item">
           <img class="d-block w-100" src="../assets/Slider_Slide2.jpg" alt="Változatas növényvilága az esőerdőknek">
           <div class="carousel-caption">

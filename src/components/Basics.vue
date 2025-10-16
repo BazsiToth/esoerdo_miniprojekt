@@ -14,17 +14,14 @@ const initAnimations = () => {
     if (animationInitialized) return;
     animationInitialized = true;
 
-    // Set initial background color
-    gsap.set(".arch", { backgroundColor: "#f9ffe7" });
-    gsap.set(".arch-container", { backgroundColor: "#f9ffe7" });
+    gsap.set(".arch", { backgroundColor: "#386041" });
+    gsap.set(".arch-container", { backgroundColor: "#386041" });
 
-    // Set z-index for images
     document.querySelectorAll(".arch__right .img-wrapper").forEach((element) => {
         const order = element.getAttribute("data-index");
         if (order !== null) element.style.zIndex = order;
     });
 
-    // Mobile layout handler (only handle order)
     const handleMobileLayout = () => {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         const leftItems = gsap.utils.toArray(".arch__left .arch__info");
@@ -39,7 +36,6 @@ const initAnimations = () => {
         }
     };
 
-    // Debounced resize for performance & refresh ScrollTrigger
     const onResize = () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
@@ -50,12 +46,11 @@ const initAnimations = () => {
     window.addEventListener("resize", onResize);
     handleMobileLayout();
 
-    // GSAP animations
     const imgs = gsap.utils.toArray(".img-wrapper img");
-    const bgColors = ["#EDF9FF", "#FFECF2", "#FFE8DB"];
+    const bgColors = ["#244238", "#244238", "#071c08", "#3F624B"];
 
     ScrollTrigger.matchMedia({
-        // Desktop / large
+        // --- DESKTOP ---
         "(min-width: 769px)": function () {
             const mainTimeline = gsap.timeline({
                 scrollTrigger: {
@@ -78,71 +73,44 @@ const initAnimations = () => {
 
                 const sectionTimeline = gsap.timeline();
 
-                // First image: animate from initial color to first color
                 if (index === 0) {
                     sectionTimeline
-                        .to(
-                            ".arch",
-                            {
-                                backgroundColor: bgColors[0],
-                                duration: 1.5,
-                                ease: "power2.inOut"
-                            },
-                            0
-                        )
-                        .to(
-                            ".arch-container",
-                            {
-                                backgroundColor: bgColors[0],
-                                duration: 1.5,
-                                ease: "power2.inOut"
-                            },
-                            0
-                        )
-                        // Pause when first image is fully visible
+                        .to(".arch", {
+                            backgroundColor: bgColors[0],
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }, 0)
+                        .to(".arch-container", {
+                            backgroundColor: bgColors[0],
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }, 0)
                         .to({}, { duration: 0.8 });
                 }
 
                 if (nextImage) {
                     sectionTimeline
-                        .to(
-                            ".arch",
-                            {
-                                backgroundColor: bgColors[index + 1],
-                                duration: 1.5,
-                                ease: "power2.inOut"
-                            },
-                            0
-                        )
-                        .to(
-                            ".arch-container",
-                            {
-                                backgroundColor: bgColors[index + 1],
-                                duration: 1.5,
-                                ease: "power2.inOut"
-                            },
-                            0
-                        )
-                        .to(
-                            currentImage,
-                            {
-                                clipPath: "inset(0px 0px 100%)",
-                                objectPosition: "0px 60%",
-                                duration: 1.5,
-                                ease: "none"
-                            },
-                            0
-                        )
-                        .to(
-                            nextImage,
-                            {
-                                objectPosition: "0px 40%",
-                                duration: 1.5,
-                                ease: "none"
-                            },
-                            0
-                        )
-                        // Pause when next image is fully visible
+                        .to(".arch", {
+                            backgroundColor: bgColors[index + 1],
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }, 0)
+                        .to(".arch-container", {
+                            backgroundColor: bgColors[index + 1],
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }, 0)
+                        .to(currentImage, {
+                            clipPath: "inset(0px 0px 100%)",
+                            objectPosition: "0px 60%",
+                            duration: 1.5,
+                            ease: "none"
+                        }, 0)
+                        .to(nextImage, {
+                            objectPosition: "0px 40%",
+                            duration: 1.5,
+                            ease: "none"
+                        }, 0)
                         .to({}, { duration: 0.8 });
                 }
 
@@ -150,27 +118,20 @@ const initAnimations = () => {
             });
         },
 
-        // Mobile
+        // --- MOBILE ---
         "(max-width: 768px)": function () {
-            const mbTimeline = gsap.timeline();
-            gsap.set(imgs, { objectPosition: "0px 60%" });
+            // Statikus képek: ne mozduljanak görgetésre
+            gsap.set(imgs, { objectPosition: "top center" });
 
             imgs.forEach((image, index) => {
-                const innerTimeline = gsap.timeline({
+                gsap.timeline({
                     scrollTrigger: {
                         trigger: image,
-                        start: "top-=70% top+=50%",
-                        end: "bottom+=200% bottom",
+                        start: "top center",
+                        end: "bottom center",
                         scrub: true
                     }
-                });
-
-                innerTimeline
-                    .to(image, {
-                        objectPosition: "0px 30%",
-                        duration: 5,
-                        ease: "none"
-                    })
+                })
                     .to(".arch", {
                         backgroundColor: bgColors[index],
                         duration: 1.5,
@@ -181,13 +142,10 @@ const initAnimations = () => {
                         duration: 1.5,
                         ease: "power2.inOut"
                     });
-
-                mbTimeline.add(innerTimeline);
             });
         }
     });
 
-    // store cleanup references on the DOM node so unmount can access them
     archRef.value.__cleanup = () => {
         window.removeEventListener("resize", onResize);
         ScrollTrigger.getAll().forEach((st) => st.kill());
@@ -196,19 +154,15 @@ const initAnimations = () => {
 };
 
 onMounted(() => {
-    // IntersectionObserver: csak akkor inicializáljuk, ha láthatóvá válik a komponens
     observer = new IntersectionObserver(
         (entries) => {
             const e = entries[0];
             if (e.isIntersecting) {
                 initAnimations();
-                // ha egyszer inicializáltuk, nem kell tovább figyelni
-                if (observer && archRef.value) {
-                    observer.unobserve(archRef.value);
-                }
+                if (observer && archRef.value) observer.unobserve(archRef.value);
             }
         },
-        { threshold: 0.15 } // ha a komponens 15%-a látszik, aktiváljuk
+        { threshold: 0.15 }
     );
 
     if (archRef.value) observer.observe(archRef.value);
@@ -216,12 +170,10 @@ onMounted(() => {
 
 onUnmounted(() => {
     if (observer && archRef.value) observer.unobserve(archRef.value);
-    // ha tároltunk cleanup függvényt
     if (archRef.value && typeof archRef.value.__cleanup === "function") {
         archRef.value.__cleanup();
         delete archRef.value.__cleanup;
     } else {
-        // biztonsági tisztítás
         ScrollTrigger.getAll().forEach((st) => st.kill());
         ScrollTrigger.clearMatchMedia();
     }
@@ -230,97 +182,96 @@ onUnmounted(() => {
 
 <template>
     <section class="arch-container">
+        <span class="arch-header">
+            <h2>Az esőerdőkről</h2>
+        </span>
         <div class="arch" ref="archRef">
             <div class="arch__left">
                 <div class="arch__info" id="green-arch">
-  <div class="content">
-    <h2 class="header">Zöld Esőerdő</h2>
-    <p class="desc">
-      Az esőerdők a Föld tüdeje – sűrű növényzetük oxigént termel, és
-      számtalan élőlény otthona. Minden fa, minden levél része a
-      bolygónk légzésének.
-    </p>
-    <a class="link" href="#" style="background-color: #D5FF37">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
-        <path fill="#121212"
-          d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
-      </svg> <span>Növényzet</span>
-    </a>
-  </div>
-</div>
+                    <div class="content text-design green-text">
+                        <h2 class="header">Zöld Esőerdő</h2>
+                        <p class="desc">
+                            Az esőerdők a Föld tüdeje – sűrű növényzetük oxigént termel, és
+                            számtalan élőlény otthona. Minden fa, minden levél része a
+                            bolygónk légzésének.
+                        </p>
+                        <a class="link" href="#" style="background-color: #287209;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
+                                <path fill="#121212"
+                                    d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
+                            </svg> <span>Növényzet</span>
+                        </a>
+                    </div>
+                </div>
 
-<div class="arch__info" id="blue-arch">
-  <div class="content">
-    <h2 class="header">Az Éltető Víz</h2>
-    <p class="desc">
-      A trópusi esőerdők folyói és patakjai az élet forrásai. A víz
-      ciklusa táplálja a növényeket, hűsíti a levegőt és biztosítja a
-      túlélést minden élőlénynek.
-    </p>
-    <a class="link" href="#" style="background-color: #7DD6FF">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
-        <path fill="#121212"
-          d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
-      </svg> <span>Víz szerepe</span>
-    </a>
-  </div>
-</div>
+                <div class="arch__info" id="blue-arch">
+                    <div class="content text-design blue-text">
+                        <h2 class="header">Az Éltető Víz</h2>
+                        <p class="desc">
+                            A trópusi esőerdők folyói és patakjai az élet forrásai. A víz
+                            ciklusa táplálja a növényeket, hűsíti a levegőt és biztosítja a
+                            túlélést minden élőlénynek.
+                        </p>
+                        <a class="link" href="#" style="background-color: #4A8C9F">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
+                                <path fill="#121212"
+                                    d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
+                            </svg> <span>Víz szerepe</span>
+                        </a>
+                    </div>
+                </div>
 
-<div class="arch__info" id="pink-arch">
-  <div class="content">
-    <h2 class="header">Az Élet Színei</h2>
-    <p class="desc">
-      A színes madarak, ritka virágok és különleges rovarok együtt
-      alkotják az esőerdő varázslatos világát. Minden árnyalat egy újabb
-      történetet mesél a természet harmóniájáról.
-    </p>
-    <a class="link" href="#" style="background-color: #FFA0B0">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
-        <path fill="#121212"
-          d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
-      </svg> <span>Galéria</span>
-    </a>
-  </div>
-</div>
+                <div class="arch__info" id="pink-arch">
+                    <div class="content text-design red-text">
+                        <h2 class="header">Az Élet Színei</h2>
+                        <p class="desc">
+                            A színes madarak, ritka virágok és különleges rovarok együtt
+                            alkotják az esőerdő varázslatos világát. Minden árnyalat egy újabb
+                            történetet mesél a természet harmóniájáról.
+                        </p>
+                        <a class="link" href="#" style="background-color: #342a1e">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
+                                <path fill="#121212"
+                                    d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
+                            </svg> <span>Galéria</span>
+                        </a>
+                    </div>
+                </div>
 
-<div class="arch__info" id="orange-arch">
-  <div class="content">
-    <h2 class="header">Az Esőerdők Védelmében</h2>
-    <p class="desc">
-      Az esőerdők irtása súlyos következményekkel jár: fajok tűnnek el,
-      az éghajlat felborul, és a Föld elveszíti természetes védelmét.
-      Minden megmentett fa számít.
-    </p>
-    <a class="link" href="#" style="background-color: #FFA17B">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
-        <path fill="#121212"
-          d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
-      </svg> <span>Természet -> Szennyezés Tegyél ellene!</span>
-    </a>
-  </div>
-</div>
+                <div class="arch__info" id="orange-arch">
+                    <div class="content text-design gray-text">
+                        <h2 class="header">Az Esőerdők Védelmében</h2>
+                        <p class="desc">
+                            Az esőerdők irtása súlyos következményekkel jár: fajok tűnnek el,
+                            az éghajlat felborul, és a Föld elveszíti természetes védelmét.
+                            Minden megmentett fa számít.
+                        </p>
+                        <a class="link" href="#" style="background-color: #fd859b">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none">
+                                <path fill="#121212"
+                                    d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z" />
+                            </svg> <span>Természet -> Szennyezés Tegyél ellene!</span>
+                        </a>
+                    </div>
+                </div>
 
             </div>
 
             <div class="arch__right">
                 <div class="img-wrapper" data-index="4" style="z-index: 4; clip-path: inset(0px);">
-                    <img src="../assets/Basics_Scroll1.jpg"
-                        alt="Green Architecture" />
+                    <img src="../assets/Basics_Scroll1.jpg" alt="Green Architecture" />
                 </div>
 
                 <div class="img-wrapper img-scroll" data-index="3" style="z-index: 3;">
-                    <img src="../assets/Basics_Scroll2.jpg"
-                        alt="Blue Architecture" />
+                    <img src="../assets/Basics_Scroll2.jpg" alt="Blue Architecture" />
                 </div>
 
-                <div class="img-wrapper img-scroll" data-index="2" style="z-index: 2;">
-                    <img src="../assets/Basics_Scroll3.jpg"
-                        alt="Pink Architecture" />
+                <div class="img-wrapper img-scroll" data-index="2" style="z-index: 2;" id="scroll3">
+                    <img src="../assets/Basics_Scroll3.jpg" alt="Pink Architecture" />
                 </div>
 
                 <div class="img-wrapper img-scroll" data-index="1" style="z-index: 1;">
-                    <img src="../assets/Basics_Scroll4.jpg"
-                        alt="Orange Architecture" />
+                    <img src="../assets/Basics_Scroll4.jpg" alt="Orange Architecture" />
                 </div>
             </div>
         </div>
@@ -330,11 +281,94 @@ onUnmounted(() => {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap");
 
+.text-design {
+    text-shadow: 5px 5px 5px rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    padding: 30px;
+    font-weight: 400;
+}
+
+.text-design>p {
+    font-weight: 500;
+    text-shadow: 5px 5px 5px rgb(0, 0, 0);
+}
+
+.text-design>a>span {
+    font-weight: 1000;
+    text-shadow: 3px 3px 10px rgb(0, 0, 0);
+}
+
+.green-text {
+    color: #72C000;
+}
+
+.green-text>h2 {
+    color: #88b2fd;
+}
+
+.green-text>p {
+    color: #FEFEFE;
+}
+
+.blue-text {
+    color: #c1e2d2;
+}
+
+.blue-text>h2 {
+    color: #BAEA4B;
+}
+
+.blue-text>p {
+    color: #75B797;
+}
+
+.red-text {
+    color: #fa6759;
+}
+
+.red-text>h2 {
+    color: #EFCF00;
+}
+
+.red-text>p {
+    color: #5b88c1;
+}
+
+.gray-text {
+    color: #F0F2EF;
+}
+
+.gray-text>h2 {
+    color: #5D844C;
+}
+
+.gray-text>p {
+    color: #917E76;
+}
+
 .arch-container {
     width: 100%;
-    padding: 30px;
-    background-color: #f9ffe7;
+    padding: 0;
     transition: background-color 0.3s ease;
+    background-color: #386041;
+}
+
+.arch-header {
+    background-color: #386041;
+    text-align: center;
+    color: white;
+    font-weight: 1000;
+}
+
+.arch-header>h2 {
+    padding-top: 60px;
+    font-size: 5em;
+    color: white;
+}
+
+.arch-text-container {
+    padding: 50px;
 }
 
 .container {
@@ -352,7 +386,7 @@ onUnmounted(() => {
     justify-content: space-between;
     max-width: 1100px;
     margin-inline: auto;
-    background-color: #f9ffe7;
+    background-color: #386041;
     transition: background-color 0.3s ease;
 }
 
@@ -430,6 +464,10 @@ onUnmounted(() => {
     .arch {
         gap: 30px;
     }
+
+    .img-wrapper {
+        margin-left: 20px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -453,12 +491,21 @@ onUnmounted(() => {
         transform: none;
         height: 360px;
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 300px;
     }
 
     .arch__left .arch__info {
         height: auto;
         padding: 20px 0;
+    }
+
+    .arch__info {
+        margin: 0 auto;
+    }
+
+    .img-wrapper {
+        margin-left: 0;
+        padding: 0 30px 0 30px;
     }
 }
 
