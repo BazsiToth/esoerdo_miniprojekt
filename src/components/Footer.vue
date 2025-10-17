@@ -1,4 +1,5 @@
 <script setup>
+import LogoSvg from './LogoSvg.vue'
 import { computed } from 'vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 
@@ -48,7 +49,7 @@ onUnmounted(() => {
   <footer class="thevr-footer">
     <div class="footer-content">
       <section class="footer-section">
-        <h3 class="footer-logo">Mouri</h3>
+        <h3 class="footer-logo"><span class="p-2"><LogoSvg /></span>Mouri</h3>
         <nav class="footer-nav">
           <router-link to="/" class="footer-link">Főoldal</router-link>
           <router-link to="/Climate" class="footer-link">Éghajlat</router-link>
@@ -107,6 +108,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+
 .icon-svg {
   width: 2rem;
   padding-bottom: 7px;
@@ -207,6 +209,7 @@ onUnmounted(() => {
   .footer-nav {
     flex-direction: column;
     gap: 0.75rem;
+    text-align: center;
   }
 
   .thevr-footer {
@@ -215,6 +218,10 @@ onUnmounted(() => {
 
   .footer-link:hover {
     transform: translateX(4px);
+  }
+
+  .footer-logo{
+      text-align: center;
   }
 }
 
