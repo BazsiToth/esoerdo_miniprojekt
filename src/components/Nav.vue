@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import LogoSvg from './LogoSvg.vue'
 
 const isOpen = ref(false)
 const isDropdownOpen = ref(false)
@@ -25,7 +26,10 @@ onMounted(() => {
 <template>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="#">Mouri</a>
+      <a class="navbar-brand brand-with-logo" href="#">
+        <LogoSvg />
+        <span class="brand-text">Mouri</span>
+      </a>
 
       <button class="navbar-toggler" type="button" @click="isOpen = !isOpen" :aria-expanded="isOpen.toString()"
         aria-label="Toggle navigation">
@@ -169,9 +173,22 @@ onMounted(() => {
   font-weight: bold;
   letter-spacing: 2px;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.navbar-light .navbar-brand:hover {
+.brand-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-text {
+  transition: all 0.3s ease;
+}
+
+.navbar-light .navbar-brand:hover .brand-text {
   transform: scale(1.05);
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
@@ -203,7 +220,7 @@ onMounted(() => {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
-/* Dropdown toggle specifikus szabályok - felülírja az általános nav-link szabályokat */
+/* Dropdown toggle specifikus szabályok */
 .dropdown-toggle::after {
   display: inline-block !important;
   margin-left: 0.255em;
