@@ -1,43 +1,96 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
-const eleres = ref("../assets/galery/animals/Galery");
+const imageFilesAnimal = import.meta.glob('../assets/galery/animals/*.jpg', { eager: true });
+const imageFilesPlant = import.meta.glob('../assets/galery/plants/*.jpg', { eager: true });
 
-const imageFiles = import.meta.glob('../assets/galery/animals/*.jpg', { eager: true })
-const IMAGE_COUNT = Object.keys(imageFiles).length
+const animalImages = computed(() => {
+    return Object.keys(imageFilesAnimal).map(path => imageFilesAnimal[path].default);
+});
+
+const plantImages = computed(() => {
+    return Object.keys(imageFilesPlant).map(path => imageFilesPlant[path].default);
+});
 
 const selectedImage = ref(null);
+const selectedGallery = ref(null);
+const selectedCategory = ref('animals');
 
-const getImageFromUrl = (url) => {
-    return new URL(eleres.value + (url + 1) + ".jpg", import.meta.url).href
-}
-
-const openLightbox = (index) => {
-    selectedImage.value = index;
+const openLightbox = (imageUrl, gallery) => {
+    selectedImage.value = imageUrl;
+    selectedGallery.value = gallery;
 }
 
 const closeLightbox = () => {
     selectedImage.value = null;
+    selectedGallery.value = null;
+}
+
+const getCurrentImages = () => {
+    return selectedGallery.value === 'animals' ? animalImages.value : plantImages.value;
 }
 
 const nextImage = () => {
-    if (selectedImage.value < kepek.value - 1) {
-        selectedImage.value++;
+    const images = getCurrentImages();
+    const currentIndex = images.indexOf(selectedImage.value);
+    if (currentIndex < images.length - 1) {
+        selectedImage.value = images[currentIndex + 1];
     }
 }
 
 const prevImage = () => {
-    if (selectedImage.value > 0) {
-        selectedImage.value--;
+    const images = getCurrentImages();
+    const currentIndex = images.indexOf(selectedImage.value);
+    if (currentIndex > 0) {
+        selectedImage.value = images[currentIndex - 1];
     }
 }
+
+const canGoPrev = computed(() => {
+    if (selectedImage.value === null) return false;
+    const images = getCurrentImages();
+    return images.indexOf(selectedImage.value) > 0;
+});
+
+const canGoNext = computed(() => {
+    if (selectedImage.value === null) return false;
+    const images = getCurrentImages();
+    const currentIndex = images.indexOf(selectedImage.value);
+    return currentIndex < images.length - 1;
+});
 </script>
 
 <template>
     <section class="gallery-container">
-        <div class="gallery-grid">
-            <div v-for="(kep, index) in IMAGE_COUNT" :key="index" class="gallery-item" @click="openLightbox(index)">
-                <img class="gallery-image" :src="getImageFromUrl(index)" :alt="'Kép ' + (index + 1)">
+        <div class="header-section">
+            <h1 class="main-title">Galéria</h1>
+            <select 
+                class="form-select" 
+                v-model="selectedCategory" 
+                @change="closeLightbox"
+                aria-label="Galéria kategória választó">
+                <option value="animals">Állatvilág</option>
+                <option value="plants">Növényzet</option>
+            </select>
+        </div>
+
+        <div v-if="selectedCategory === 'animals'">
+            <h2>Állatvilág</h2>
+            <div class="gallery-grid">
+                <div v-for="(image, index) in animalImages" :key="'animal-' + index"
+                     class="gallery-item" @click="openLightbox(image, 'animals')">
+                    <img class="gallery-image" :src="image" :alt="'Állat kép ' + (index + 1)">
+                </div>
+            </div>
+        </div>
+
+        <div v-if="selectedCategory === 'plants'">
+            <h2>Növényzet</h2>
+            <div class="gallery-grid">
+                <div v-for="(image, index) in plantImages" :key="'plant-' + index"
+                     class="gallery-item" @click="openLightbox(image, 'plants')">
+                    <img class="gallery-image" :src="image" :alt="'Növény kép ' + (index + 1)">
+                </div>
             </div>
         </div>
 
@@ -45,11 +98,11 @@ const prevImage = () => {
             <button class="close" @click="closeLightbox">
                 <i class="bi bi-x-lg"></i>
             </button>
-            <button v-if="selectedImage > 0" class="nav prev" @click="prevImage">
+            <button v-if="canGoPrev" class="nav prev" @click="prevImage">
                 <i class="bi bi-arrow-left-circle-fill"></i>
             </button>
-            <img :src="getImageFromUrl(selectedImage)" :alt="'Kép ' + (selectedImage + 1)">
-            <button v-if="selectedImage < kepek - 1" class="nav next" @click="nextImage">
+            <img :src="selectedImage" alt="Nagyított kép">
+            <button v-if="canGoNext" class="nav next" @click="nextImage">
                 <i class="bi bi-arrow-right-circle-fill"></i>
             </button>
         </div>
@@ -57,16 +110,76 @@ const prevImage = () => {
 </template>
 
 <style scoped>
+.d-flex {
+    padding: 2rem 0rem 2rem 0rem;
+}
+
 .gallery-container {
     padding: 100px 20px 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    gap: 2rem;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+select {
+    width: 100%;
+    max-width: 280px;
+    height: 3.5rem;
+    font-size: 1.1rem;
+    padding: 0 1.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+}
+
+select:hover {
+    border-color: #4CAF50;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+    transform: translateY(-2px);
+}
+
+select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+select option {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+h2 {
+    margin: 40px 0 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    margin-bottom: 40px;
 }
 
 .gallery-item {
@@ -160,6 +273,22 @@ const prevImage = () => {
 @media (max-width: 576px) {
     .gallery-container {
         padding-top: 80px;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .main-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    select {
+        max-width: 100%;
     }
 
     .gallery-grid {
