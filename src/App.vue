@@ -3,6 +3,7 @@ import Navbar from './components/Nav.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import Footer from './components/Footer.vue';
 
 const isLoading = ref(false);
 const route = useRoute();
@@ -32,8 +33,8 @@ watch(() => route.fullPath, (newPath) => {
   <main>
     <router-view :key="route.fullPath"></router-view>
   </main>
-  <footer class="text-center p-4">
-    Copyright &copy; All right reserved!
+  <footer>
+    <Footer/>
   </footer>
 </template>
 

@@ -107,8 +107,8 @@ onMounted(() => {
   padding: 5px;
   font-weight: 500;
   text-shadow: 2px 2px 10px black;
+  position: relative;
 }
-
 
 .dropdown-menu {
   text-align: center;
@@ -120,6 +120,31 @@ onMounted(() => {
   color: white;
   font-weight: 500;
   text-shadow: 2px 2px 10px black;
+  position: relative;
+  padding: 12px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-item::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 6px;
+  transform: translateY(-2px);
+}
+
+.dropdown-item:hover::after {
+  width: 70%;
 }
 
 .nav-item:hover {
@@ -129,11 +154,6 @@ onMounted(() => {
 
 .dropdown-menu-dark {
   background-color: rgba(0, 0, 0, 0.4);
-}
-
-.dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 6px;
 }
 
 .dropdown-toggle:hover,
@@ -148,10 +168,70 @@ onMounted(() => {
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.navbar-light .navbar-brand:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .navbar-light .navbar-nav .nav-link {
   color: #fff;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-light .navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-light .navbar-nav .nav-link:hover::after {
+  width: 80%;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Dropdown toggle specifikus szabályok - felülírja az általános nav-link szabályokat */
+.dropdown-toggle::after {
+  display: inline-block !important;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+.nav-item.dropdown .dropdown-toggle::after {
+  content: '';
+  position: static;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+  transform: none;
+  transition: none;
+}
+
+.nav-item.dropdown .dropdown-toggle:hover::after {
+  width: auto;
+  background-color: transparent;
 }
 
 .navbar-toggler {
