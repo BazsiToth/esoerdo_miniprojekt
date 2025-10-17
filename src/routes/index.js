@@ -1,7 +1,7 @@
 import { createRouter,createWebHistory } from "vue-router";
 import Kezdolap from "../components/Kezdolap.vue";
 import Quiz from "../components/Quiz.vue";
-import Galeria from "../components/Galeria.vue";
+import Galery from "../components/Galery.vue";
 
 const routes = [
       {
@@ -13,8 +13,8 @@ const routes = [
             component: Quiz
       },
       {
-            path: '/galeria',
-            component: Galeria
+            path: '/galery',
+            component: Galery
       }
 ]
 

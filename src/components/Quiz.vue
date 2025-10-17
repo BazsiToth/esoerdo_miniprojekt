@@ -100,7 +100,7 @@ function getButtonClass(index, answer) {
         <h2>Quiz Teljesítve!</h2>
         <p id="final-score">{{ finalScoreText }}</p>
         <button id="restart-btn" class="main-btn" @click="restartQuiz">
-          Kezd újra
+          Kezdd újra
         </button>
       </div>
     </div>
