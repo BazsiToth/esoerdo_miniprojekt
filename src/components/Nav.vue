@@ -1,25 +1,26 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import LogoSvg from './LogoSvg.vue'
+import { ref, onMounted } from 'vue';
+import LogoSvg from './LogoSvg.vue';
+import MusicPlayer from './Musicplayer.vue';
 
-const isOpen = ref(false)
-const isDropdownOpen = ref(false)
-const windowWidth = ref(window.innerWidth)
+const isOpen = ref(false);
+const isDropdownOpen = ref(false);
+const windowWidth = ref(window.innerWidth);
 
 const closeMenu = () => {
-  isOpen.value = false
-  isDropdownOpen.value = false
+  isOpen.value = false;
+  isDropdownOpen.value = false;
 }
 
 const handleResize = () => {
-  windowWidth.value = window.innerWidth
+  windowWidth.value = window.innerWidth;
   if (windowWidth.value > 992) {
-    isDropdownOpen.value = false
+    isDropdownOpen.value = false;
   }
 }
 
 onMounted(() => {
-  window.addEventListener('resize', handleResize)
+  window.addEventListener('resize', handleResize);
 })
 </script>
 
@@ -38,6 +39,7 @@ onMounted(() => {
 
       <div class="collapse navbar-collapse" :class="{ show: isOpen }" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
+          <MusicPlayer />
           <li class="nav-item">
             <router-link to="/" class="nav-link active" href="#" @click="closeMenu">Főoldal</router-link>
           </li>
