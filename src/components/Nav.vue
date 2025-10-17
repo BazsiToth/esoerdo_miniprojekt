@@ -50,16 +50,16 @@ onMounted(() => {
               Esőerdő
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" :class="{ show: isDropdownOpen }">
-              <li><a class="dropdown-item" href="#">Éghajlata</a></li>
-              <li><a class="dropdown-item" href="#">Természete</a></li>
-              <li><a class="dropdown-item" href="#">Állatvilága</a></li>
+              <router-link to="/climate"><a class="dropdown-item" href="#">Éghajlata</a></router-link>
+              <router-link to="/nature"><a class="dropdown-item" href="#">Természete</a></router-link>
+              <router-link to="/animals"><a class="dropdown-item" href="#">Állatvilága</a></router-link>
             </ul>
           </li>
-          <li class="nav-item"><router-link to="/galery" class="nav-link" href="#"
+          <li class="nav-item"><router-link to="/gallery" class="nav-link" href="#"
               @click="closeMenu">Galéria</router-link></li>
           <li class="nav-item"><router-link to="/quiz" class="nav-link" href="#" @click="closeMenu">Quiz</router-link>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#" @click="closeMenu">Rólunk</a></li>
+          <li class="nav-item"><router-link to="/about" class="nav-link" href="#" @click="closeMenu">Rólunk</router-link></li>
         </ul>
       </div>
     </div>
