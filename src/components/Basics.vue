@@ -450,6 +450,7 @@ onUnmounted(() => {
 }
 
 .img-wrapper img {
+    padding: 10px;
     width: 100%;
     object-fit: cover;
     object-position: center;
@@ -466,7 +467,7 @@ onUnmounted(() => {
     }
 
     .img-wrapper {
-        margin-left: 20px;
+        margin-right: 20px;
     }
 }
 
@@ -521,6 +522,10 @@ onUnmounted(() => {
     .arch__right .img-wrapper {
         border-radius: 10px;
         height: 280px;
+    }
+
+    .arch-header>h2 {
+        font-size: 4em;
     }
 }
 </style>
