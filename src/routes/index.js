@@ -1,7 +1,11 @@
 import { createRouter,createWebHistory } from "vue-router";
 import Kezdolap from "../components/Kezdolap.vue";
 import Quiz from "../components/Quiz.vue";
-import Galery from "../components/Galery.vue";
+import Gallery from "../components/Gallery.vue";
+import Animals from "../components/Animals.vue";
+import Climate from "../components/Climate.vue";
+import Nature from "../components/Nature.vue";
+import About from "../components/About.vue";
 
 const routes = [
       {
@@ -13,8 +17,24 @@ const routes = [
             component: Quiz
       },
       {
-            path: '/galery',
-            component: Galery
+            path: '/gallery',
+            component: Gallery
+      },
+      {
+            path: '/animals',
+            component: Animals
+      },
+      {
+            path: '/climate',
+            component: Climate
+      },
+      {
+            path: '/nature',
+            component: Nature
+      },
+      {
+            path: '/about',
+            component: About
       }
 ]
 

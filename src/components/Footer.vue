@@ -52,12 +52,12 @@ onUnmounted(() => {
         <h3 class="footer-logo"><span class="p-2"><LogoSvg /></span>Mouri</h3>
         <nav class="footer-nav">
           <router-link to="/" class="footer-link">Főoldal</router-link>
-          <router-link to="/Climate" class="footer-link">Éghajlat</router-link>
-          <router-link to="/Nature" class="footer-link">Természet</router-link>
-          <router-link to="/Animals" class="footer-link">Állatvilág</router-link>
-          <router-link to="/Galery" class="footer-link">Galéria</router-link>
-          <router-link to="/Quiz" class="footer-link">Quiz</router-link>
-          <router-link to="https://vod.thevr.hu" class="footer-link">Rólunk</router-link>
+          <router-link to="/climate" class="footer-link">Éghajlat</router-link>
+          <router-link to="/nature" class="footer-link">Természet</router-link>
+          <router-link to="/animals" class="footer-link">Állatvilág</router-link>
+          <router-link to="/gallery" class="footer-link">Galéria</router-link>
+          <router-link to="/quiz" class="footer-link">Quiz</router-link>
+          <router-link to="/about" class="footer-link">Rólunk</router-link>
         </nav>
       </section>
       <section class="marquee-container">
