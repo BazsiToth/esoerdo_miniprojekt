@@ -135,6 +135,8 @@ const onDropClick = (e) => {
 onMounted(() => {
   makeItRain();
   updateScrollSync();
+  document.body.style.cssText = 'scrollbar-width: none; -ms-overflow-style: none;';
+  document.documentElement.style.cssText = 'scrollbar-width: none; -ms-overflow-style: none;';
   window.addEventListener('scroll', updateScrollSync, { passive: true });
   window.addEventListener('resize', updateScrollSync, { passive: true });
 });
@@ -211,14 +213,15 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+
 #home {
   position: relative;
   width: 100%;
-  min-height: 100dvh;
+  min-height: 100dvh; /* height helyett min-height */
   background: linear-gradient(to bottom, #202020, #111119);
   color: #e7e6f1;
   text-align: center;
-  overflow-x: hidden;
+  overflow: hidden; /* overflow-x helyett overflow */
 }
 
 #home::-webkit-scrollbar {
@@ -324,7 +327,7 @@ onBeforeUnmount(() => {
 .container {
   position: relative;
   z-index: 4;
-  padding: 140px 20px;
+  padding: 80px 20px; /* 140px helyett 80px */
   max-width: 900px;
   margin: 0 auto;
 }
@@ -338,5 +341,22 @@ p { margin: 0 0 36px; color: #cbd2ea; }
   .container { padding-top: 100px; }
   .drop { height: calc(var(--w,8px) * 5); }
   .splat { bottom: -4px; }
+}
+
+@media (max-width:586px){
+  @keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  85% {
+    transform: translateY(calc(100dvh));
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100dvh));
+    opacity: 0;
+  }
+}
 }
 </style>
