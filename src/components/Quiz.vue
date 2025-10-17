@@ -74,7 +74,7 @@ function getButtonClass(index, answer) {
 <template>
   <div class="quiz-wrapper">
     <div class="app-container">
-      <h1>General Knowledge Quiz</h1>
+      <h1>Quiz Kérdések</h1>
 
       <div v-if="!showResults" id="quiz-content">
         <div id="question-area" class="question-area">
@@ -97,10 +97,10 @@ function getButtonClass(index, answer) {
       </div>
 
       <div v-else id="result-area" class="result-area">
-        <h2>Quiz Complete!</h2>
+        <h2>Quiz Teljesítve!</h2>
         <p id="final-score">{{ finalScoreText }}</p>
         <button id="restart-btn" class="main-btn" @click="restartQuiz">
-          Restart Quiz
+          Kezd újra
         </button>
       </div>
     </div>
