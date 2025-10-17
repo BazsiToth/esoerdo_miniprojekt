@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, watch } from "vue";
 
 const musicFiles = [
   new URL("../assets/musics/music1.mp3", import.meta.url).href,
@@ -14,9 +14,6 @@ const hoveredSkip = ref(false);
 const hoveredMute = ref(false);
 let audio;
 
-onMounted(() => {
-  loadAndPlayTrack(currentTrackIndex.value);
-});
 
 watch(volume, (val) => {
   if (audio) audio.volume = val;
@@ -30,7 +27,6 @@ const nextTrack = () => {
   loadAndPlayTrack(currentTrackIndex.value);
 };
 
-
 function loadAndPlayTrack(index) {
   if (audio) {
     audio.pause();
@@ -41,8 +37,6 @@ function loadAndPlayTrack(index) {
   audio.loop = false;
   audio.volume = volume.value;
   audio.muted = muted.value;
-
-
   audio.addEventListener("ended", nextTrack);
 
   audio.play().catch(() => {
@@ -54,88 +48,153 @@ const toggleMute = () => {
   muted.value = !muted.value;
 };
 
-const handleMouseEnter = () => {
-  showSlider.value = true;
-};
-const handleMouseLeave = () => {
-  showSlider.value = false;
+const toggleSlider = () => {
+
+  showSlider.value = !showSlider.value;
 };
 </script>
 
 <template>
-  <div class="music-player" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-    <div class="volume-slider" v-show="showSlider">
-      <input type="range" min="0" max="1" step="0.01" v-model="volume" />
-    </div>
-<button @click="toggleMute" class="volume-btn" :title="muted ? 'Némítva' : 'Hangerő'">
-    <i 
-      :class="muted
-               ? (hoveredMute ? 'bi bi-volume-mute-fill fs-4' : 'bi bi-volume-mute fs-4')
-               : (hoveredMute ? 'bi bi-volume-up-fill fs-4' : 'bi bi-volume-up fs-4')"
-      @mouseenter="hoveredMute = true"
-      @mouseleave="hoveredMute = false"
-    ></i>
-  </button>
+  <div class="music-player">
 
-  <button @click="nextTrack" class="next-btn" title="Következő zene">
-    <i 
-      :class="hoveredSkip ? 'bi bi-skip-end-fill fs-4' : 'bi bi-skip-end fs-4'"
-      @mouseenter="hoveredSkip = true"
-      @mouseleave="hoveredSkip = false"
-    ></i>
-  </button>
+    <div class="volume-container">
+      <button @click="toggleMute" @touchstart.prevent="toggleMute" class="volume-btn"
+        :title="muted ? 'Némítva' : 'Hangerő'">
+        <i :class="muted
+            ? hoveredMute
+              ? 'bi bi-volume-mute-fill fs-4'
+              : 'bi bi-volume-mute fs-4'
+            : hoveredMute
+              ? 'bi bi-volume-up-fill fs-4'
+              : 'bi bi-volume-up fs-4'
+          " @mouseenter="hoveredMute = true" @mouseleave="hoveredMute = false"></i>
+      </button>
+
+
+      <div class="volume-slider" :class="{ visible: showSlider }">
+        <input type="range" min="0" max="1" step="0.01" v-model="volume" @touchstart.stop />
+      </div>
+
+
+      <button class="slider-toggle-btn" @click="toggleSlider" @touchstart.prevent="toggleSlider"
+        title="Hangerő szabályzás">
+        <i class="bi bi-sliders fs-5"></i>
+      </button>
+    </div>
+
+
+    <button @click="nextTrack" @touchstart.prevent="nextTrack" class="next-btn" title="Következő zene">
+      <i :class="hoveredSkip ? 'bi bi-skip-end-fill fs-4' : 'bi bi-skip-end fs-4'" @mouseenter="hoveredSkip = true"
+        @mouseleave="hoveredSkip = false"></i>
+    </button>
   </div>
 </template>
 
 <style scoped>
 .music-player {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
   background: rgba(0, 94, 16, 0.6);
   border-radius: 30px;
   padding: 8px 14px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: 0.3s ease;
   z-index: 999;
+  backdrop-filter: blur(8px);
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .volume-btn,
-.next-btn {
+.next-btn,
+.slider-toggle-btn {
   background: none;
   border: none;
   cursor: pointer;
-  color: #ffffff;
-  width: 30px;
-  height: 30px;
+  color: #fff;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .volume-btn:hover,
-.next-btn:hover {
+.next-btn:hover,
+.slider-toggle-btn:hover {
   color: #31ff5d;
+  transform: scale(1.1);
 }
 
 .volume-slider {
-  margin-left: 10px;
   opacity: 0;
   transform: translateX(10px);
   transition: all 0.3s ease;
+  position: absolute;
+  left: -120px;
+  top: 5px;
+}
+
+.volume-slider.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .volume-slider input {
   width: 100px;
-  accent-color: #80ffa649;
+  accent-color: #31ff5d;
   cursor: pointer;
 }
 
-.music-player:hover .volume-slider {
-  opacity: 1;
-  transform: translateX(0);
+
+@media (max-width: 768px) {
+  .music-player {
+    bottom: 10px;
+    right: 10px;
+    padding: 6px 10px;
+  }
+
+  .volume-slider {
+    left: auto;
+    right: 0;
+    top: -40px;
+  }
+
+  .volume-slider input {
+    width: 80px;
+  }
+
+  .volume-btn,
+  .next-btn,
+  .slider-toggle-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .music-player {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-player {
+    flex-direction: row;
+    padding: 6px 8px;
+  }
+
+  .volume-slider input {
+    width: 60px;
+  }
+
+  .slider-toggle-btn {
+    display: inline-flex;
+  }
 }
 </style>

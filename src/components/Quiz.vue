@@ -275,7 +275,6 @@ h1 {
   display: none !important;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .app-container {
     padding: 30px 20px;

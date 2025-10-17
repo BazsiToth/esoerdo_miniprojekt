@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-const imageFilesAnimal = import.meta.glob('../assets/galery/animals/*.jpg', { eager: true });
-const imageFilesPlant = import.meta.glob('../assets/galery/plants/*.jpg', { eager: true });
+const imageFilesAnimal = import.meta.glob('../assets/gallery/animals/*.jpg', { eager: true });
+const imageFilesPlant = import.meta.glob('../assets/gallery/plants/*.jpg', { eager: true });
 
 const animalImages = computed(() => {
     return Object.keys(imageFilesAnimal).map(path => imageFilesAnimal[path].default);

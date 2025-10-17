@@ -46,7 +46,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <footer class="thevr-footer">
+  <footer class="rainforest-footer">
     <div class="footer-content">
       <section class="footer-section">
         <h3 class="footer-logo"><span class="p-2"><LogoSvg /></span>Mouri</h3>
@@ -119,13 +119,12 @@ onUnmounted(() => {
   transition: fill 0.4s ease;
 }
 
-/* Hover állapot */
 .icon-item:hover path {
   fill: url(#icon-gradient);
 }
 
 
-.thevr-footer {
+.rainforest-footer {
   background: linear-gradient(to bottom, #0a2510, #000c02);
   color: #ffffff;
   padding: 3rem 2rem 2rem;
@@ -212,7 +211,7 @@ onUnmounted(() => {
     text-align: center;
   }
 
-  .thevr-footer {
+  .rainforest-footer {
     padding: 2rem 1rem 1.5rem;
   }
 

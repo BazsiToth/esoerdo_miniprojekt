@@ -36,10 +36,9 @@ onMounted(() => {
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+      <MusicPlayer />
       <div class="collapse navbar-collapse" :class="{ show: isOpen }" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
-          <MusicPlayer />
           <li class="nav-item">
             <router-link to="/" class="nav-link active" href="#" @click="closeMenu">Főoldal</router-link>
           </li>
@@ -222,7 +221,6 @@ onMounted(() => {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
-/* Dropdown toggle specifikus szabályok */
 .dropdown-toggle::after {
   display: inline-block !important;
   margin-left: 0.255em;

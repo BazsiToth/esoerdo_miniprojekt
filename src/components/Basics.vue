@@ -50,7 +50,6 @@ const initAnimations = () => {
     const bgColors = ["#244238", "#244238", "#071c08", "#3F624B"];
 
     ScrollTrigger.matchMedia({
-        // --- DESKTOP ---
         "(min-width: 769px)": function () {
             const mainTimeline = gsap.timeline({
                 scrollTrigger: {
@@ -118,9 +117,7 @@ const initAnimations = () => {
             });
         },
 
-        // --- MOBILE ---
         "(max-width: 768px)": function () {
-            // Statikus képek: ne mozduljanak görgetésre
             gsap.set(imgs, { objectPosition: "top center" });
 
             imgs.forEach((image, index) => {
@@ -460,7 +457,7 @@ onUnmounted(() => {
     height: 100%;
 }
 
-/* responsive */
+
 @media (max-width: 900px) {
     .arch {
         gap: 30px;

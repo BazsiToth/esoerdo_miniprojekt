@@ -107,7 +107,7 @@
   transition: font-size 0.3s ease, line-height 0.3s ease;
 }
 
-/* Mobil nézet optimalizálás */
+
 @media (max-width: 1200px) {
   .carousel-caption h5 {
     font-size: 54px;
@@ -155,7 +155,7 @@
   }
 }
 
-/* Bootstrap carousel átmenet simítása */
+
 .carousel-item {
   transition: transform 0.6s ease-in-out;
 }

@@ -14,7 +14,7 @@ import logoSrc from '../assets/svgs/leaves-icon.svg'
   filter: drop-shadow(0 0 3px rgba(0, 150, 50, 0.4));
 }
 
-/* Hover effekt - parent hover által aktiválódik */
+
 .navbar-brand:hover .brand-logo {
   transform: scale(1.25) rotate(5deg);
   filter: drop-shadow(0 0 8px rgba(0, 180, 60, 0.9))
@@ -24,7 +24,7 @@ import logoSrc from '../assets/svgs/leaves-icon.svg'
   animation: greenGlowPulse 2s ease-in-out infinite;
 }
 
-/* Zöld pulzáló glow animáció */
+
 @keyframes greenGlowPulse {
   0%, 100% {
     filter: drop-shadow(0 0 8px rgba(0, 180, 60, 0.9))
