@@ -14,7 +14,7 @@ const plantImages = computed(() => {
 
 const selectedImage = ref(null);
 const selectedGallery = ref(null);
-const selectedCategory = ref('animals');
+const selectedCategory = ref('all');
 
 const openLightbox = (imageUrl, gallery) => {
     selectedImage.value = imageUrl;
@@ -69,12 +69,13 @@ const canGoNext = computed(() => {
                 v-model="selectedCategory" 
                 @change="closeLightbox"
                 aria-label="Galéria kategória választó">
+                <option value="all">Összes</option>
                 <option value="animals">Állatvilág</option>
-                <option value="plants">Növényzet</option>
+                <option value="plants">Növényvilág</option>
             </select>
         </div>
 
-        <div v-if="selectedCategory === 'animals'">
+        <div v-if="selectedCategory === 'all' || selectedCategory === 'animals'">
             <h2>Állatvilág</h2>
             <div class="gallery-grid">
                 <div v-for="(image, index) in animalImages" :key="'animal-' + index"
@@ -84,7 +85,7 @@ const canGoNext = computed(() => {
             </div>
         </div>
 
-        <div v-if="selectedCategory === 'plants'">
+        <div v-if="selectedCategory === 'all' || selectedCategory === 'plants'">
             <h2>Növényzet</h2>
             <div class="gallery-grid">
                 <div v-for="(image, index) in plantImages" :key="'plant-' + index"
