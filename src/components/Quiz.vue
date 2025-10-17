@@ -72,89 +72,91 @@ function getButtonClass(index, answer) {
 </script>
 
 <template>
-  <div class="app-container">
-    <h1><span class="highlight-text">🧠</span> General Knowledge Quiz</h1>
+  <div class="quiz-wrapper">
+    <div class="app-container">
+      <h1>General Knowledge Quiz</h1>
 
-    <div v-if="!showResults" id="quiz-content">
-      <div id="question-area" class="question-area">
-        <p id="question-text">{{ currentQuestion.question }}</p>
+      <div v-if="!showResults" id="quiz-content">
+        <div id="question-area" class="question-area">
+          <p id="question-text">{{ currentQuestion.question }}</p>
+        </div>
+
+        <div id="answer-buttons" class="answer-buttons">
+          <button v-for="(answer, index) in currentQuestion.answers" :key="index" :class="getButtonClass(index, answer)"
+            :disabled="answerSelected" @click="selectAnswer(index, answer.correct)">
+            {{ answer.text }}
+          </button>
+        </div>
+
+        <div class="controls-footer">
+          <p id="progress-text">{{ progressText }}</p>
+          <button id="next-btn" class="main-btn" :disabled="!answerSelected" @click="nextQuestion">
+            {{ nextButtonText }}
+          </button>
+        </div>
       </div>
 
-      <div id="answer-buttons" class="answer-buttons">
-        <button v-for="(answer, index) in currentQuestion.answers" :key="index" :class="getButtonClass(index, answer)"
-          :disabled="answerSelected" @click="selectAnswer(index, answer.correct)">
-          {{ answer.text }}
+      <div v-else id="result-area" class="result-area">
+        <h2>Quiz Complete!</h2>
+        <p id="final-score">{{ finalScoreText }}</p>
+        <button id="restart-btn" class="main-btn" @click="restartQuiz">
+          Restart Quiz
         </button>
       </div>
-
-      <div class="controls-footer">
-        <p id="progress-text">{{ progressText }}</p>
-        <button id="next-btn" class="main-btn" :disabled="!answerSelected" @click="nextQuestion">
-          {{ nextButtonText }}
-        </button>
-      </div>
-    </div>
-
-    <div v-else id="result-area" class="result-area">
-      <h2>Quiz Complete! 🎉</h2>
-      <p id="final-score">{{ finalScoreText }}</p>
-      <button id="restart-btn" class="main-btn" @click="restartQuiz">
-        Restart Quiz
-      </button>
     </div>
   </div>
 </template>
+
 <style scoped>
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* Use a modern, clean font */
   font-family: 'Poppins', sans-serif;
 }
 
-body {
-  background: linear-gradient(135deg, #b9f2ff, #20b2aa);
+.quiz-wrapper {
+  background: linear-gradient(135deg, #0a1f0a 0%, #0d260d 50%, #0f2f0f 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  width: 100%;
 }
 
 .app-container {
-  background: white;
+  background: linear-gradient(145deg, #1a2e1a, #1f3a1f);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 550px;
   transition: all 0.5s ease-in-out;
+  border: 1px solid rgba(144, 238, 144, 0.2);
 }
 
 h1 {
   text-align: center;
-  color: #008080;
+  color: #90ee90;
   margin-bottom: 30px;
   font-size: 2.2em;
   font-weight: 700;
-}
-
-.highlight-text {
-  color: #ff8c00;
-  margin-right: 5px;
+  text-shadow: 0 0 20px rgba(144, 238, 144, 0.3);
 }
 
 .question-area {
-  background-color: #f7ffff;
+  background-color: rgba(26, 46, 26, 0.6);
   border-radius: 10px;
   padding: 25px;
   margin-bottom: 25px;
+  border: 1px solid rgba(144, 238, 144, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 #question-text {
   font-size: 1.3em;
-  color: #333;
+  color: #e0e0e0;
   line-height: 1.6;
   font-weight: 500;
 }
@@ -167,22 +169,23 @@ h1 {
 }
 
 .btn {
-  background-color: #fff;
-  color: #008080;
-  border: 2px solid #b9f2ff;
+  background-color: rgba(31, 58, 31, 0.8);
+  color: #90ee90;
+  border: 2px solid rgba(144, 238, 144, 0.3);
   padding: 15px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 1em;
   text-align: left;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover:not([disabled]) {
-  background-color: #e0ffff;
-  border-color: #008080;
+  background-color: rgba(144, 238, 144, 0.15);
+  border-color: #90ee90;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(144, 238, 144, 0.3);
 }
 
 .btn:disabled {
@@ -195,7 +198,7 @@ h1 {
   border-color: #1e7e34;
   color: white;
   font-weight: bold;
-  box-shadow: 0 0 10px #28a74580;
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
 }
 
 .btn.incorrect {
@@ -203,6 +206,7 @@ h1 {
   border-color: #bd2130;
   color: white;
   font-weight: bold;
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
 }
 
 .controls-footer {
@@ -210,37 +214,42 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 #progress-text {
-  color: #6c757d;
+  color: #a0a0a0;
   font-size: 0.9em;
   font-weight: 500;
 }
 
 .main-btn {
-  background-color: #ff8c00;
-  color: white;
+  background: linear-gradient(135deg, #90ee90, #32cd32);
+  color: #0a1f0a;
   border: none;
   padding: 12px 25px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
   font-weight: 600;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(144, 238, 144, 0.3);
 }
 
 .main-btn:hover:not([disabled]) {
-  background-color: #e67e00;
+  background: linear-gradient(135deg, #98fb98, #90ee90);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(144, 238, 144, 0.5);
 }
 
 .main-btn:disabled {
-  background-color: #cccccc;
-  color: #999999;
+  background: #444;
+  color: #888;
   cursor: not-allowed;
+  box-shadow: none;
 }
-
 
 .result-area {
   text-align: center;
@@ -248,19 +257,82 @@ h1 {
 }
 
 .result-area h2 {
-  color: #008080;
+  color: #90ee90;
   margin-bottom: 15px;
   font-size: 2em;
+  text-shadow: 0 0 20px rgba(144, 238, 144, 0.4);
 }
 
 #final-score {
   font-size: 1.8em;
   font-weight: bold;
-  color: #28a745;
+  color: #98fb98;
   margin-bottom: 30px;
+  text-shadow: 0 0 15px rgba(144, 238, 144, 0.4);
 }
 
 .hidden {
   display: none !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  #question-text {
+    font-size: 1.1em;
+  }
+
+  .controls-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .main-btn {
+    width: 100%;
+  }
+
+  #progress-text {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-wrapper {
+    padding: 10px;
+  }
+
+  .app-container {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  #question-text {
+    font-size: 1em;
+  }
+
+  .btn {
+    font-size: 0.9em;
+    padding: 12px;
+  }
+
+  .result-area h2 {
+    font-size: 1.6em;
+  }
+
+  #final-score {
+    font-size: 1.4em;
+  }
 }
 </style>
