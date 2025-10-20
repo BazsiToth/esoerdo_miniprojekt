@@ -156,6 +156,10 @@ A projekt az esőerdő témához illeszkedő zöld árnyalatokat használ:
 
 Ez a projekt MIT licensz alatt áll. További részletekért lásd a LICENSE fájlt.
 
+## 💻 Drótváz
+
+A drótváz megtekinthető itt: **[https://excalidraw.com/#json=RpSydV51Y_pXQl42gX_xu,mK9YqHFJRomSXNLmGzTzGg]**
+
 ⭐ Ha tetszik a projekt, ne felejtsd el adni egy csillagot a GitHub-on!
 
 
