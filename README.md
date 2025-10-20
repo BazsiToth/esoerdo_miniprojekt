@@ -6,7 +6,7 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 
 ╰─ npm install jquery                                                                                                                                                    ─╯
 
-╰─ npm install bootstrap jquery popper.js                                                                                                                                ─╯
+╰─ '''npm install bootstrap jquery popper.js                                                                                                        '''
 
 npm install gsap
 
