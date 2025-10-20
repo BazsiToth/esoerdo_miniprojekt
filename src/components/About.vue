@@ -14,15 +14,12 @@ const handleSubmit = async () => {
   isSubmitting.value = true
   
   try {
-    // Itt kezelheted a form küldését (pl. API hívás)
     console.log('Contact form submitted:', formData.value)
     
-    // Szimuláljuk az API hívást
     await new Promise(resolve => setTimeout(resolve, 1000))
     
     submitSuccess.value = true
     
-    // Form reset
     setTimeout(() => {
       formData.value = {
         name: '',
@@ -46,7 +43,6 @@ const handleSubmit = async () => {
       <h1 class="contact-title">LÉPJ VELÜNK KAPCSOLATBA</h1>
       
       <form @submit.prevent="handleSubmit">
-        <!-- Név mező -->
         <div class="form-group mb-5">
           <input 
             type="text" 
@@ -65,7 +61,6 @@ const handleSubmit = async () => {
           </label>
         </div>
 
-        <!-- Email mező -->
         <div class="form-group mb-5">
           <input 
             type="email" 
@@ -84,7 +79,6 @@ const handleSubmit = async () => {
           </label>
         </div>
 
-        <!-- Üzenet mező -->
         <div class="form-group mb-5">
           <textarea 
             id="message" 
@@ -102,13 +96,11 @@ const handleSubmit = async () => {
           </label>
         </div>
 
-        <!-- Success message -->
         <div v-if="submitSuccess" class="alert alert-success mb-4" role="alert">
           <i class="bi bi-check-circle-fill me-2"></i>
           Köszönjük az üzeneted! Hamarosan válaszolunk.
         </div>
 
-        <!-- Submit gomb -->
         <div class="d-flex justify-content-center">
           <button 
             type="submit" 

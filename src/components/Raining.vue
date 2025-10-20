@@ -327,7 +327,7 @@ onBeforeUnmount(() => {
 .container {
   position: relative;
   z-index: 4;
-  padding: 80px 20px; /* 140px helyett 80px */
+  padding: 80px 20px; 
   max-width: 900px;
   margin: 0 auto;
 }

@@ -9,11 +9,11 @@ const selectedAnswerIndex = ref(null);
 const showResults = ref(false);
 
 const currentQuestion = computed(() => questions[currentQuestionIndex.value]);
-const progressText = computed(() => `Question ${currentQuestionIndex.value + 1} of ${questions.length}`);
+const progressText = computed(() => `Kérdés ${currentQuestionIndex.value + 1} a ${questions.length} ből.`);
 const nextButtonText = computed(() =>
-  currentQuestionIndex.value === questions.length - 1 ? 'See Results' : 'Next Question'
+  currentQuestionIndex.value === questions.length - 1 ? 'Nézd meg az eredméyed' : 'Következő kérdés'
 );
-const finalScoreText = computed(() => `You scored ${score.value} out of ${questions.length}.`);
+const finalScoreText = computed(() => `Pontszámod ${score.value} a ${questions.length} ból.`);
 
 function selectAnswer(answerIndex, isCorrect) {
   if (answerSelected.value) return;

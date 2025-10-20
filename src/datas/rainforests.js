@@ -110,5 +110,3 @@ export const rainforests = [
     "kep": "/assets/IM_indo_burma.png"
   }
 ]
-
-export const kepekszama = 12;

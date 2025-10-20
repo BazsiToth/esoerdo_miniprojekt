@@ -27,10 +27,10 @@ onMounted(() => {
 <template>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
     <div class="container">
-      <a class="navbar-brand brand-with-logo" href="#">
+      <router-link to="/" class="navbar-brand brand-with-logo" href="#">
         <LogoSvg />
         <span class="brand-text">Mouri</span>
-      </a>
+      </router-link>
 
       <button class="navbar-toggler" type="button" @click="isOpen = !isOpen" :aria-expanded="isOpen.toString()"
         aria-label="Toggle navigation">
