@@ -158,7 +158,7 @@ Ez a projekt MIT licensz alatt áll. További részletekért lásd a LICENSE fá
 
 ## 💻 Drótváz
 
-A drótváz megtekinthető itt: **[https://excalidraw.com/#json=RpSydV51Y_pXQl42gX_xu,mK9YqHFJRomSXNLmGzTzGg]**
+A drótváz megtekinthető itt: **(https://excalidraw.com/#json=TDNZ6q70AJ7TwemINT3mM,XCffq_FqxipdEwTh8-hKPA)**
 
 ⭐ Ha tetszik a projekt, ne felejtsd el adni egy csillagot a GitHub-on!
 
