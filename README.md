@@ -65,21 +65,21 @@ git repo clone https://github.com/BazsiToth/Esoerdo_miniprojekt.git
 
 Futtasd az alábbi parancsokat a megadott sorrendben:
 
-'''
+```
 npm install jquery
-'''
+```
 
-'''
+```
 npm install bootstrap jquery popper.js
-'''
+```
 
-'''
+```
 npm install gsap
-'''
+```
 
-'''
+```
 npm i
-'''
+```
 
 Ez telepíti az összes szükséges függőséget, beleértve:
 - Vue 3 és Vue Router
