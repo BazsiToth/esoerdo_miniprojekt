@@ -207,7 +207,6 @@ onBeforeUnmount(() => {
     <div class="container">
       <h1>Éghajlat</h1>
       <h4>Változatos éghejlata az</h4>
-      <p>The blue drop on the top right can be dragged to scroll. It won't leave the screen.</p>
     </div>
   </section>
 </template>
