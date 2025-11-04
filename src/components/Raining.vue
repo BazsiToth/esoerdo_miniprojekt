@@ -205,8 +205,8 @@ onBeforeUnmount(() => {
     />
 
     <div class="container">
-      <h1>Welcome to Vue 3</h1>
-      <h4>Scroll down or drag the drop!</h4>
+      <h1>Éghajlat</h1>
+      <h4>Változatos éghejlata az</h4>
       <p>The blue drop on the top right can be dragged to scroll. It won't leave the screen.</p>
     </div>
   </section>
@@ -217,11 +217,11 @@ onBeforeUnmount(() => {
 #home {
   position: relative;
   width: 100%;
-  min-height: 100dvh; /* height helyett min-height */
+  min-height: 100dvh; 
   background: linear-gradient(to bottom, #202020, #111119);
   color: #e7e6f1;
   text-align: center;
-  overflow: hidden; /* overflow-x helyett overflow */
+  overflow: hidden; 
 }
 
 #home::-webkit-scrollbar {
